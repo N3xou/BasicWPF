@@ -1,0 +1,108 @@
+﻿<Window x:Class="Projekt1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projekt1"
+        mc:Ignorable="d"
+         Height="450" Width="800" MinHeight="450" MinWidth="800"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Button Name="Menu" Click="ButtonMenuClicked" Width="400" Margin="0,0,0,0"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\Yami\Desktop\x\Projekt1\img\FriedChickenJ.jfif" Stretch="Fill" />
+            </Button.Background>
+            <Button.Content>
+                <Border BorderThickness="6" BorderBrush="#2c3e50" CornerRadius="30" Background="#3498db" Padding="20">
+                    <TextBlock x:Name="TextMenu" Text="Menu" FontSize="30" FontWeight="Bold" Foreground="White" />
+                </Border>
+            </Button.Content>
+        </Button>
+        <Button Name="CompletedOrders" Click="ButtonCmpOrdersClicked" Width="400" Margin="0,0,0,0" Grid.Row="0"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\Yami\Desktop\x\Projekt1\img\Calendar.jpg" Stretch="Fill" />
+            </Button.Background>
+            <Button.Content>
+                <Border BorderThickness="6" BorderBrush="#2c3e50" CornerRadius="30" Background="#3498db" Padding="20">
+                    <TextBlock Text="Completed Orders" x:Name="TextCompletedOrders" FontSize="26" FontWeight="Bold" Foreground="White" />
+                </Border>
+            </Button.Content>
+        </Button>
+        <DataGrid Name ="MainGrid" ItemsSource="{Binding}" Margin="0,0,0,0" FontSize="18" Grid.ColumnSpan="2" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn FontSize="22" Width="4*" Binding="{Binding id}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="ID" x:Name="TextID"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+
+                
+                <DataGridTextColumn Width="4*" Binding="{Binding time, StringFormat={}{0:HH:mm}}">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="Order Time" x:Name="TextOrderTime"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Width="3*">
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="Details" x:Name="TextDetails"/>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="Button" x:Name="BtnDetails">
+                            <Button Click="_BtnDetails">
+                                <Button.Content>
+                                    <TextBlock Text="{Binding TextBtnDetails}"/>
+
+
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="3*">
+                    <DataGridTemplateColumn.Header>
+                        <TextBlock Text="x"/>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="Button" x:Name="BtnFinish">
+                            <Button Click="_BtnComplete" DataContext="{Binding}">
+                                <Button.Content>
+                                    <TextBlock Text="{Binding TextBtnComplete}"/>
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <ResourceDictionary>
+                    <Style x:Key="{x:Type DataGridCell}" TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="Background" Value="{x:Null}" />
+                        <Setter Property="BorderBrush" Value="{x:Null}" />
+                    </Style>
+                </ResourceDictionary>
+            </DataGrid.Resources>
+        </DataGrid>
+        <Button Grid.Row="1" Grid.Column="2" Name="ButtonLangPL" Background="#3498db" Click="LanguagePLClicked" 
+                Margin="5" Height="50" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Panel.ZIndex="1">
+            <Button.Content>
+
+                <Image Source="C:\Users\Yami\Desktop\x\Projekt1\img\FlagPL.png" Stretch="Fill" />
+            </Button.Content>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="2" Name="ButtonLangEng" Background="#3498db" Click="LanguageENGClicked" 
+                Margin="0,5,70,5" Height="50" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Right" Panel.ZIndex="1">
+            <Button.Content>
+                <Image Source="C:\Users\Yami\Desktop\x\Projekt1\img\FlagENG.png" Stretch="Fill" />
+            </Button.Content>
+        </Button>
+    </Grid>
+</Window>
